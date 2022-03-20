@@ -1,11 +1,22 @@
 <script>
 import http from "../../src/httpcall";  
+import 'vue-datepicker-ui/lib/vuedatepickerui.css';
+import VueDatepickerUi from 'vue-datepicker-ui';
+
 export default{
     name: 'InvoiceUpdate',
+    components: {
+      Datepicker: VueDatepickerUi,
+    },
     created () {
         this.initialcall(this.$route.params.id)
     },
     methods: {
+        addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        },
         async initialcall(id){
             this.invoiceid = id;
             console.log(id);
@@ -25,6 +36,8 @@ export default{
             this.invoice_subtotal = this.form['subtotal'];
             this.invoice_total = this.form['total'];
             this.taxval = this.form['taxtotal'];
+            this.newtodayDate= new Date(this.form['date']);
+            this.newduedate= new Date(this.form['due_date']);
         },
         onFocus: function(event) {
             event.target.className = 'form-yellow-bg'
@@ -76,9 +89,11 @@ export default{
             if(this.invoice_productslist.length > 0){
                 this.form['line_items'] = JSON.stringify(this.invoice_productslist);
             }
+            this.form['date'] = String(this.addDays(new Date(this.newtodayDate), 1).toJSON().slice(0,10));
+            this.form['due_date'] = String(this.addDays(new Date(this.newduedate), 1).toJSON().slice(0,10));
             console.log( Object.keys(this.form), this.form['salesperson_company'] , this.form['customer_name'], (Object.keys(this.form).length > 0 &&  Object.keys(this.form).includes('salesperson_company') && Object.keys(this.form).includes('customer_name') && this.form['salesperson_company'] != '' && this.form['customer_name'] != ''));
             if(Object.keys(this.form).length > 0 &&  Object.keys(this.form).includes('salesperson_company') && Object.keys(this.form).includes('customer_name') && this.form['salesperson_company'] != '' && this.form['customer_name'] != ''){
-                console.log(`if save ---`);
+                console.log(`if save ---`, this.form);
                 this.postdata(this.form);
                 this.$router.push({name: 'home'}) ;
                 this.msgflag="hide";
@@ -152,7 +167,8 @@ export default{
             invoice_subtotal: 0.00,
             invoice_tax: 10,
             taxval:0.00,
-            formatted_date: new Date().toJSON().slice(0,10).split('-')[2]+'-'+new Date().toJSON().slice(0,10).split('-')[1]+'-'+new Date().toJSON().slice(0,10).split('-')[0],
+            newtodayDate : new Date(),
+            newduedate: new Date(),
             inputfields : [
                 {'text': 'Your Company Name', 'name': 'salesperson_company', 'disabled':'readonly'},
                 {'text': 'Your Name', 'name': 'salesperson_name', 'disabled':'readonly'}, 
@@ -169,8 +185,8 @@ export default{
             ],
             billdetails: [ 
                 {'text':'Invoice#', 'type': 'text', 'value':'INV-12','name':'invoice_number', 'disabled':'readonly'},
-                {'text':'Invoice Date', 'type': 'date', 'value':this.formatted_date, 'name':'date', 'disabled':'readonly'},
-                {'text':'Due Date', 'type': 'date', 'value':this.formatted_date, 'name':'due_date', 'disabled':''},
+                {'text':'Invoice Date', 'type': 'date', 'value':'', 'name':'date', 'disabled':'readonly'},
+                {'text':'Due Date', 'type': 'date', 'value':'', 'name':'due_date', 'disabled':''},
             ],
             thlist: [
                 {'text':'Item Description', 'width':'40%', 'align':'left'},
@@ -234,7 +250,21 @@ export default{
                     <div class= "col-md-5 lft-aln">
                         <input class="form-control-read" :id="field.text" type="text"  :value="field.text" readonly />
                     </div><div class= "col-md-6 rgt-aln">
-                        <input class="form-control-inp" :id="field.text" @focus="onFocusIn($event)" @blur="onFocusOut" :type="field.type" v-model="form[field.name]" :placeholder="field.text"  />
+                        <template  v-if=" field.type == 'date'">
+                            <template  v-if=" field.name == 'date'">
+                                <Datepicker lang="en-in" v-model="newtodayDate" class="form-control-inp invoice_date" disabled="true" :name="field.name" :id="field.text" />
+                            </template>
+
+                            <template  v-else>
+                                <Datepicker lang="en-in"  v-model="newduedate" class="form-control-inp due_date" :name="field.name" :id="field.text" />
+                            </template>
+                            
+                            
+                        </template>
+                        <template v-else>                            
+                           <input class="form-control-inp" :name="field.name" :id="field.text"  :type="field.type" v-model="form[field.name]" :readonly="field.disabled"  />
+                        </template>
+                        <!--<input class="form-control-inp" :id="field.text" @focus="onFocusIn($event)" @blur="onFocusOut" :type="field.type" v-model="form[field.name]" :placeholder="field.text"  />-->
                     </div></div>
                 </template>
             </div>
@@ -284,6 +314,6 @@ export default{
 </template>
 
 <style scoped>
-@import '../../src/assets/stylesheet.css'
+@import '../../src/assets/stylesheet2.css'
 
 </style>
