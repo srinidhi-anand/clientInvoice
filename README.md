@@ -1,4 +1,4 @@
-# invoicefrontend
+# clientinvoice
 
 ## Project setup
 ```
