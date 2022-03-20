@@ -21,6 +21,15 @@ npm run build
     
     Update page = navigation from home page when clikcing on the hyperlink of invoice id in list page will post the update to API ( https:localhost:8000/api/invoices/<invoice_id> to be updated in SQLite database invoices.
     
+### Urls for application
+```
+http:localhost:8080/home - Home page
+http:localhost:8080/create - New invoice creation page
+http:localhost:8080/update/<invoice_id> -  existing invoice update page 
+
+```   
+    
+    
     
 Attached Video of the workable demo in output folder for reference. 
     
