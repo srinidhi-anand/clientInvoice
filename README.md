@@ -15,10 +15,12 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+    Home Page = List all invoices as a grid.
+    
+    Create page = To create a new invoice and unique invoice id will be generated to be posted in the API ( https:localhost:8000/api/invoices/) to be created in SQLite database invoices.
+    
+    Update page = navigation from home page when clikcing on the hyperlink of invoice id in list page will post the update to API ( https:localhost:8000/api/invoices/<invoice_id> to be updated in SQLite database invoices.
+    
+    
+Attached Video of the workable demo in output folder for reference. 
+    
