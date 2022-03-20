@@ -1,22 +1,18 @@
 <script>
 import 'vue-datepicker-ui/lib/vuedatepickerui.css';
 import VueDatepickerUi from 'vue-datepicker-ui';
-//import VCalendar from 'v-calendar';
+
 
 export default{
     name: 'InvoiceCreate',
     components: {
       Datepicker: VueDatepickerUi,
-      //vdatepicker: VCalendar,
     },
     methods: {
-        datepicker: function() {
-            console.log( this.newtodayDate ,`cccc` , this.newduedate);
-            this.newtodayDate = new Date(this.newtodayDate);
-            this.newduedate = new Date(this.newduedate);
-            //this.newtodayDate = new Date(this.newtodayDate).toJSON().slice(0,10).toString(),
-            //this.newduedate = new Date(this.newduedate).toJSON().slice(0,10).toString(),
-            console.log( this.newtodayDate ,`cccc` , this.newduedate);
+        addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
         },
         onFocus: function(event) {
             event.target.className = 'form-yellow-bg'
@@ -28,26 +24,10 @@ export default{
         onFocusIn: function(event) {
             event.target.id = 'form-yellow-bg'
             console.log( event,`dd`);
-            if(event.target.name == 'date' || event.target.name == 'due_date'){
-                //event.target.type = 'date';
-                console.log( event.target.value,`hhhh`);
-                if (event.target.value == '' ){
-                    console.log( this.newtodayDate,`333333333`);
-                    //event.target.value = this.newtodayDate;
-                }
-            }
         },
         onFocusOut: function(event) {
             event.target.id = '';
             console.log( event,`ffff`);
-            if(event.target.name == 'date' || event.target.name == 'due_date'){
-                //event.target.type = 'text';
-                 console.log( event.target.value,`gggg`);
-                if (event.target.value == '' ){
-                    console.log( this.todayDate,`444444444444`);
-                    //event.target.value = this.todayDate;
-                }
-            }
         },
         addrow: function(){
             console.log("new row clicked");
@@ -66,7 +46,6 @@ export default{
              this.$router.push({name: 'home'}) 
         },
         async postdata() {
-            //this.form = {customer_address: "Madurai", customer_city_state: "Tamil Nadu", customer_cntry: "India", customer_name: "ABC & Co", date: "2022-03-18", due_date: "2022-04-02", invoice_id: "310651630", invoice_number: "INV-0009", line_items: "[{\"item_id\":570973671,\"name\":\"AXC design\",\"product_type\":\"\",\"rate\":5465,\"quantity\":3,\"item_total\":\"16395.00\"},{\"item_id\":493208235,\"name\":\"Brochure\",\"product_type\":\"\",\"rate\":3434,\"quantity\":3,\"item_total\":\"10302.00\"}]", notes: "Thanks for the great business.", salesperson_address: "Kotivakkam", salesperson_city_state: "Chennai, Tamil Nadu", salesperson_cntry: "India", salesperson_company: "Bowman & Co", salesperson_name: "Abinay", status: "draft", subtotal: "26697.00", taxtotal: "2669.70", terms: "Please make sure of payments by the Due date.", total: "29366.70"}
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -79,19 +58,19 @@ export default{
             } catch (error) {
                 console.log(error);
             }
-            console.log(`inputjson`, this.inputjson);
         },
         saveInvoice() {
-            console.log(this.form, 'clicked ',this.inputjson,' save', this.invoice_productslist);
+            console.log(this.form, 'clicked  save', this.invoice_productslist);
             if(this.invoice_productslist.length > 0){
                 this.form['line_items'] = JSON.stringify(this.invoice_productslist);
             }
             this.form['invoice_id'] = Math.floor(Math.random() * 1000000000);
             this.form['status']='draft';
-            //this.postdata(this.form);
+            this.form['date'] = String(this.addDays(new Date(this.newtodayDate), 1).toJSON().slice(0,10));
+            this.form['due_date'] = String(this.addDays(new Date(this.newduedate), 1).toJSON().slice(0,10));
             console.log( Object.keys(this.form), this.form['salesperson_company'] , this.form['customer_name'], (Object.keys(this.form).length > 0 &&  Object.keys(this.form).includes('salesperson_company') && Object.keys(this.form).includes('customer_name') && this.form['salesperson_company'] != '' && this.form['customer_name'] != ''));
             if(Object.keys(this.form).length > 0 &&  Object.keys(this.form).includes('salesperson_company') && Object.keys(this.form).includes('customer_name') && this.form['salesperson_company'] != '' && this.form['customer_name'] != ''){
-                console.log(`if save ---`);
+                console.log(`if save ---`, this.form);
                 this.postdata(this.form);
                 this.$router.push({name: 'home'}) ;
                 this.msgflag="hide";
@@ -159,16 +138,13 @@ export default{
                 }
             ],
             msgflag:"hide",
-            inputjson :{},
             invoice_subtotal: 0.00,
             invoice_tax: 10,
             taxval:0.00,
             invoice_total:0.00,
-            // todayDate: new Date().toJSON().slice(0,10).split('-').reverse().join('-').toString(),
             newtodayDate : new Date(),
             newduedate: new Date(),
-            //formatted_date: new Date().toJSON().slice(0,10).split('-')[2]+'-'+new Date().toJSON().slice(0,10).split('-')[1]+'-'+new Date().toJSON().slice(0,10).split('-')[0],
-            form : {'date' : this.newtodayDate, 'due_date' :this.newduedate},
+            form : {},
             inputfields : [
                 {'text': 'Your Company Name', 'name': 'salesperson_company'},
                 {'text': 'Your Name', 'name': 'salesperson_name'}, 
@@ -185,8 +161,8 @@ export default{
             ],
             billdetails: [ 
                 {'text':'Invoice#', 'type': 'text', 'value':'INV-0000','name':'invoice_number'},
-                {'text':'Invoice Date', 'type': 'date', 'value':'newtodayDate', 'name':'date'},
-                {'text':'Due Date', 'type': 'date', 'value':'newduedate', 'name':'due_date'},
+                {'text':'Invoice Date', 'type': 'date', 'value':'', 'name':'date'},
+                {'text':'Due Date', 'type': 'date', 'value':'', 'name':'due_date'},
             ],
             thlist: [
                 {'text':'Item Description', 'width':'40%', 'align':'left'},
@@ -242,13 +218,11 @@ export default{
                     </div><div class= "col-md-6 rgt-aln">
                         <template  v-if=" field.type == 'date'">
                             <template  v-if=" field.name == 'date'">
-                                <Datepicker lang="en-in"  @change="datepicker" v-model="newtodayDate" class="form-control-inp" :placeholder="new Date().toJSON().slice(0,10)" :name="field.name" :id="field.text" />
-                                <pre> {{newtodayDate}} </pre>
+                                <Datepicker lang="en-in" v-model="newtodayDate" class="form-control-inp" :placeholder="new Date().toJSON().slice(0,10)" :name="field.name" :id="field.text" />
                             </template>
 
-                            <template  v-if=" field.name == 'due_date'">
-                                <Datepicker @change="datepicker" lang="en"   v-model="newduedate" class="form-control-inp" :name="field.name" :id="field.text" :placeholder="new Date().toJSON().slice(0,10)" />
-                                <pre> {{newduedate}} </pre>
+                            <template  v-else>
+                                <Datepicker lang="en-in"  v-model="newduedate" class="form-control-inp" :name="field.name" :id="field.text" :placeholder="new Date().toJSON().slice(0,10)" />
                             </template>
                             
                             
