@@ -23,13 +23,18 @@ npm run build
     
 ### Urls for application
 ```
-http:localhost:8080/home - Home page
-http:localhost:8080/create - New invoice creation page
-http:localhost:8080/update/<invoice_id> -  existing invoice update page 
+HOME / CREATE Buttons are aligned at the right top of the page to perform the desired operations
 
-```   
+``` 
     
-    
-    
-Attached Video of the workable demo in output folder for reference. 
-    
+Attached Video of the workable demo in output folder for reference ( tested via localhost) . 
+
+# Creation video link 
+
+https://user-images.githubusercontent.com/50217774/159169847-f43613cd-a813-473a-b9ed-8232b4360285.mp4
+
+# Update / listing video link
+
+https://user-images.githubusercontent.com/50217774/159169943-5476feaa-ddb0-4faf-aa16-7929bf930227.mp4
+
+
