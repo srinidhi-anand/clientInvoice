@@ -1,0 +1,19 @@
+#app{
+    padding: 20px;
+    color: #000;
+}
+#pagination{
+    padding:10px;
+}
+.pageno {
+    float:right;
+}
+.result-cnt{
+    float:left;
+}
+.footer-btn{
+    margin-right:1%;
+    border-color: white;
+    background-color: white;
+    box-shadow: 1px 1px 1px lightgrey;
+}

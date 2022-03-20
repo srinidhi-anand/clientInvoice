@@ -1,0 +1,150 @@
+.head-div{
+    margin-left: 17px;
+    margin-bottom: 20px;
+}
+.btn-head{
+    width:80%
+}
+.page-alert{
+    background-color: red;
+    color: white;
+    width:88%;
+    margin-left:100px;
+    margin-bottom:40px;
+}
+#show{
+    display: block;
+}
+#hide{
+    display: none;
+}
+.title{
+    font-size: xxx-large;
+    font-weight: bolder;
+    font-family: serif;
+}
+.btn-clr{
+    background-color: white;
+    margin:10px;;
+}
+.clr{
+    background-color:  #f46e3e ;
+    margin:10px;
+    color:white;
+}
+.page-div{
+    box-shadow: 1px 5px 5px grey;
+    width:78%;
+    margin-top:30px !important;
+    margin-left: 23px !important;
+}
+.lft-aln{
+    float:left;
+}
+.rgt-aln{
+    float:right;
+}
+.action-icon {
+    width: 20px;
+    height: 33px;
+    vertical-align: middle;
+}
+.action{
+    height: 40px;
+    width: 81px;
+}
+#shp-field{
+    font-weight: lighter;
+    color: black;
+    width: 77%;
+    margin-bottom: 1%;
+    border: inherit;
+    box-shadow: inherit;
+}
+.ship-dtl{
+    padding-top: 17px;
+    margin-right: 57px
+}
+.billdetails{
+    margin-top: 22px !important;
+    margin-left: -85px;
+}
+.billdetails input{
+    width: 100%;
+}
+.form-control-read,.form-control-inp{
+    border: inherit;
+    box-shadow: inherit;
+    margin-bottom:23px
+}
+.form-control-read{
+    width: 101%;
+}
+.table.table-bordered{
+    width: 85%;
+    table-layout: fixed;
+    margin-left: 72px;
+    margin-top: 17px;
+    border-width: 0 !important;
+    border-color: white !important;
+}
+.throw{
+    background-color: brown !important;
+    color: white;
+}
+.footer-inp{
+    margin-left: 57px !important;
+    width:88%;
+    margin-right: 10px !important;
+}
+.terms{
+    margin-top:14px !important;
+    padding: 0 !important;
+    text-align: left;
+    font-size:larger;
+}
+.note{
+    border: inherit;
+    box-shadow: inherit;
+    padding: 0  !important;
+    margin-top:10px !important;
+    margin-bottom: 16px !important;
+}
+.sumval{
+    background-color: lightgrey;
+    padding-bottom:2%
+}
+.form-yellow-bg, #form-yellow-bg{
+    background-color: lightgoldenrodyellow;
+}
+.hyperlink:hover{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+.trashIconContainer:hover{
+    cursor: pointer;
+}
+.text-right{
+    text-align:right;
+}
+.hyperlink{
+    margin-right: 149px;
+}
+.v-calendar .input-field input{
+    height: 27px !important;
+    width: 66% !important;
+    background-color: lightgoldenrodyellow !important;
+}
+.v-calendar .input-field {
+    height: 27px !important;
+}
+.datepicker{
+    display: none !important;
+}
+.v-calendar .calendar{
+    --v-calendar-text-color: black !important;
+} 
+.v-calendar .calendar .days .day.name, .v-calendar .calendar .selected-field .viewButton{
+    color: black !important;
+}

@@ -1,4 +1,4 @@
-# myfirstproj
+# invoicefrontend
 
 ## Project setup
 ```
