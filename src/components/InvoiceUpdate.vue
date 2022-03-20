@@ -77,7 +77,7 @@ export default{
             };
             console.log(requestOptions);
             try {
-                fetch("https://sri143.pythonanywhere.com/api/invoices/"+this.invoiceid+"/", requestOptions)
+                fetch("http://sri143.pythonanywhere.com/api/invoices/"+this.invoiceid+"/", requestOptions)
                     .then(response => response.json());
             } catch (error) {
                 console.log(error);
