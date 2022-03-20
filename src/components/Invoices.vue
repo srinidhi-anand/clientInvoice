@@ -53,7 +53,7 @@ export default{
             };
             console.log(requestOptions);
             try {
-                fetch("http://sri143.pythonanywhere.com/api/invoices/", requestOptions)
+                fetch("https://sri143.pythonanywhere.com/api/invoices/", requestOptions)
                     .then(response => response.json());
             } catch (error) {
                 console.log(error);
