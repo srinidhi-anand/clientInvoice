@@ -68,6 +68,10 @@ export default{
             this.form['status']='draft';
             this.form['date'] = String(this.addDays(new Date(this.newtodayDate), 1).toJSON().slice(0,10));
             this.form['due_date'] = String(this.addDays(new Date(this.newduedate), 1).toJSON().slice(0,10));
+<<<<<<< HEAD
+=======
+            //this.postdata(this.form);
+>>>>>>> 6727ed4 (changes)
             console.log( Object.keys(this.form), this.form['salesperson_company'] , this.form['customer_name'], (Object.keys(this.form).length > 0 &&  Object.keys(this.form).includes('salesperson_company') && Object.keys(this.form).includes('customer_name') && this.form['salesperson_company'] != '' && this.form['customer_name'] != ''));
             if(Object.keys(this.form).length > 0 &&  Object.keys(this.form).includes('salesperson_company') && Object.keys(this.form).includes('customer_name') && this.form['salesperson_company'] != '' && this.form['customer_name'] != ''){
                 console.log(`if save ---`, this.form);
@@ -144,6 +148,10 @@ export default{
             invoice_total:0.00,
             newtodayDate : new Date(),
             newduedate: new Date(),
+<<<<<<< HEAD
+=======
+            //formatted_date: new Date().toJSON().slice(0,10).split('-')[2]+'-'+new Date().toJSON().slice(0,10).split('-')[1]+'-'+new Date().toJSON().slice(0,10).split('-')[0],
+>>>>>>> 6727ed4 (changes)
             form : {},
             inputfields : [
                 {'text': 'Your Company Name', 'name': 'salesperson_company'},
