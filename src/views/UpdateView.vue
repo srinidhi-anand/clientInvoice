@@ -1,6 +1,5 @@
 <template>
   <div class="about">
-     <!--<div>User {{ $route.params.id }}</div>-->
     <InvoiceUpdate /> 
   </div>
 </template>
