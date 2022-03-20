@@ -17,9 +17,9 @@ npm run build
 
     Home Page = List all invoices as a grid.
     
-    Create page = To create a new invoice and unique invoice id will be generated to be posted in the API ( http://sri143.pythonanywhere.com/api/invoices/) to be created in SQLite database invoices.
+    Create page = To create a new invoice and unique invoice id will be generated to be posted in the API ( https://sri143.pythonanywhere.com/api/invoices/) to be created in SQLite database invoices.
     
-    Update page = navigation from home page when clikcing on the hyperlink of invoice id in list page will post the update to API ( http://sri143.pythonanywhere.com/api/invoices/<invoice_id> to be updated in SQLite database invoices.
+    Update page = navigation from home page when clikcing on the hyperlink of invoice id in list page will post the update to API ( https://sri143.pythonanywhere.com/api/invoices/<invoice_id> to be updated in SQLite database invoices.
     
 ### Urls for application
 ```
